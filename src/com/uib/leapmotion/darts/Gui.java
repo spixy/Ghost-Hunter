@@ -6,6 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -26,11 +28,16 @@ public class Gui extends JFrame {
     private RenderingHints antialiasing;
     private final float dartRadius = 10;
     private final Color dartColor = Color.white;
-
     private float dartX, dartY, dartZ;
+
+    private ArrayList<HittableObject> enemies;
+
+    private Random random = new Random();
 
     public void start()
     {
+        enemies = new ArrayList<>();
+
         antialiasing = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphicsContext = new BufferedImage(width + (2 * padding), width + (2 * padding), BufferedImage.TYPE_INT_RGB);
         contextRender = new JLabel(new ImageIcon(graphicsContext));
@@ -48,7 +55,7 @@ public class Gui extends JFrame {
         this.dartX = getWidth() / 2;
         this.dartY = getHeight() / 2;
         this.dartZ = 0;
-        this.DrawDart();
+        this.DrawUpdate();
 
         setVisible(true);
     }
@@ -63,10 +70,15 @@ public class Gui extends JFrame {
         this.dartY = clamp(this.dartY + y, 0, getHeight());
         this.dartZ = clamp(this.dartZ + z , 1, 10);
 
-        this.DrawDart();
+        if (random.nextFloat() < 0.1f)
+        {
+
+        }
+
+        this.DrawUpdate();
     }
 
-    private void DrawDart() {
+    private void DrawUpdate() {
         Graphics2D g2d = graphicsContext.createGraphics();
         g2d.setRenderingHints(antialiasing);
 
@@ -77,7 +89,13 @@ public class Gui extends JFrame {
         font = font.deriveFont(Font.BOLD, 14f);
         g2d.setFont(font);
 
-        float radius = dartRadius * dartZ; // TODO: more dartZ == smaller dart
+        // draw enemies
+        for (HittableObject enemy : enemies)
+        {
+            enemy.Draw(g2d);
+        }
+
+        float radius = dartRadius * dartZ;
 
         //set up the large circle
         Ellipse2D.Double dart = new Ellipse2D.Double(dartX - radius, dartY - radius, 2 * radius, 2 * radius);
