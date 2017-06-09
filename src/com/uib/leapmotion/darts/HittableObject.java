@@ -25,12 +25,13 @@ public class HittableObject {
         //float radius = dartRadius * dartZ;
         //set up the large circle
         //Ellipse2D.Double dart = new Ellipse2D.Double(dartX - radius, dartY - radius, 2 * radius, 2 * radius);
-        int x = rn.nextInt() % Gui.WINDOW_WIDTH;
-        int y = rn.nextInt() %Gui.WINDOW_HEIGHT;
+        int x = rn.nextInt(Gui.WINDOW_WIDTH);
+        int y = rn.nextInt(Gui.WINDOW_HEIGHT);
 
         BufferedImage img;
         try {
-            img = ImageIO.read(getClass().getResource("enemy.png"));
+            URL url = getClass().getResource("/enemy.gif");
+            img = ImageIO.read(url);
             g2d.drawImage(img, x,y,width,height,null);
         } catch (Exception e) {
             e.printStackTrace();
