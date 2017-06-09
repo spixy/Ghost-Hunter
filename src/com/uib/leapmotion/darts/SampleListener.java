@@ -78,10 +78,10 @@ class SampleListener extends Listener {
 
         if (readyForControl && rightHand.confidence() > .15)
         {
-            float xSpeed = (velocity.getX() / 12);
-            float ySpeed = (velocity.getY() / 12);
+            float xSpeed = (velocity.getX() /  12);
+            float ySpeed = (velocity.getY() / -12);
             float zSpeed = (velocity.getZ() / 400);
-            gui.OnHandChange(xSpeed, -ySpeed, zSpeed);
+            gui.OnHandChange(xSpeed, ySpeed, zSpeed);
         }
     }
 }

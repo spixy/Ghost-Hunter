@@ -28,6 +28,8 @@ public class Gui extends JFrame {
     private RenderingHints antialiasing;
     private final float dartRadius = 10;
     private final Color dartColor = Color.white;
+    private final float enemySpawnProbability = 0.1f;
+    private final int MaxEnemyCount = 3;
     private float dartX, dartY, dartZ;
 
     private ArrayList<HittableObject> enemies;
@@ -70,11 +72,6 @@ public class Gui extends JFrame {
         this.dartY = clamp(this.dartY + y, 0, getHeight());
         this.dartZ = clamp(this.dartZ + z , 1, 10);
 
-        if (random.nextFloat() < 0.1f)
-        {
-
-        }
-
         this.DrawUpdate();
     }
 
@@ -88,6 +85,12 @@ public class Gui extends JFrame {
         Font font = g2d.getFont();
         font = font.deriveFont(Font.BOLD, 14f);
         g2d.setFont(font);
+
+        // spawn new enemy
+        if (enemies.size() < MaxEnemyCount && random.nextFloat() < enemySpawnProbability)
+        {
+            enemies.add(new HittableObject());
+        }
 
         // draw enemies
         for (HittableObject enemy : enemies)
