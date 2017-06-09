@@ -49,7 +49,7 @@ public class Gui extends JFrame {
         enemies = new ArrayList<>();
 
         antialiasing = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        graphicsContext = new BufferedImage(WINDOW_WIDTH + (2 * padding), WINDOW_WIDTH + (2 * padding), BufferedImage.TYPE_INT_RGB);
+        graphicsContext = new BufferedImage(WINDOW_WIDTH + (2 * padding), WINDOW_HEIGHT + (2 * padding), BufferedImage.TYPE_INT_RGB);
         contextRender = new JLabel(new ImageIcon(graphicsContext));
 
         contentPanel.add(contextRender);
