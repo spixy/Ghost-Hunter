@@ -1,8 +1,5 @@
 package com.uib.leapmotion.darts.movements;
 
-import com.uib.leapmotion.darts.Gui;
-import com.uib.leapmotion.darts.HittableObject;
-
 import java.util.Random;
 
 /**
