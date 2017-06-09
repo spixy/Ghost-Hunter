@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="LeapJava">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../sdk/LeapSDK/lib/LeapJava.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/LeapJava.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
