@@ -32,7 +32,7 @@ public class HittableObject {
         try {
             img = ImageIO.read(getClass().getResource("enemy.png"));
             g2d.drawImage(img, x,y,width,height,null);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             g2d.setColor(Color.BLUE);
             g2d.drawOval(x, y, width,height);
