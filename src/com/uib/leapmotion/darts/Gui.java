@@ -1,9 +1,6 @@
 package com.uib.leapmotion.darts;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -34,11 +31,10 @@ public class Gui extends JFrame {
     private final int MaxEnemyCount = 3;
     private float dartX, dartY, dartZ;
     private ArrayList<HittableObject> enemies;
-    private final boolean useTimer = true;
 
     private Random random = new Random();
 
-    public void start()
+    public void start(boolean useTimer)
     {
         enemies = new ArrayList<>();
 
@@ -58,7 +54,7 @@ public class Gui extends JFrame {
 
         this.dartX = getWidth() / 2;
         this.dartY = getHeight() / 2;
-        this.dartZ = 0;
+        this.dartZ = 1;
         this.DrawUpdate();
 
         setVisible(true);
@@ -69,6 +65,9 @@ public class Gui extends JFrame {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
+                    Point mouseLoc = MouseInfo.getPointerInfo().getLocation();
+                    dartX = mouseLoc.x;
+                    dartY = mouseLoc.y;
                     DrawUpdate();
                 }
             }, 20, 20);
@@ -106,10 +105,10 @@ public class Gui extends JFrame {
         }
 
         // draw enemies
-        for (HittableObject enemy : enemies)
+        /*for (HittableObject enemy : enemies)
         {
             enemy.Draw(g2d);
-        }
+        }*/
 
         float radius = dartRadius * dartZ;
 
