@@ -3,11 +3,14 @@ package com.uib.leapmotion.darts;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,6 +33,7 @@ public class Gui extends JFrame {
     private final int MaxEnemyCount = 3;
     private float dartX, dartY, dartZ;
     private ArrayList<HittableObject> enemies;
+    private BufferedImage background;
 
     private Random random = new Random();
 
@@ -50,6 +54,13 @@ public class Gui extends JFrame {
         //take advantage of auto-sizing the window based on the size of its contents
         this.pack();
         this.setLocationRelativeTo(null);
+
+        try {
+            URL url = getClass().getResource("/wallpaper.jpg");
+            background = ImageIO.read(url);
+        } catch (IOException e) {
+            background = null;
+        }
 
         this.dartX = getWidth() / 2;
         this.dartY = getHeight() / 2;
@@ -89,7 +100,11 @@ public class Gui extends JFrame {
     private void DrawUpdate() {
         Graphics2D g2d = graphicsContext.createGraphics();
         g2d.setRenderingHints(antialiasing);
-        g2d.clearRect(0, 0, getWidth(), getHeight());
+
+        if (background != null)
+            g2d.drawImage(background, 0, 0, null);
+        else
+            g2d.clearRect(0, 0, getWidth(), getHeight());
 
         // spawn new enemy
         if (enemies.size() < MaxEnemyCount && random.nextFloat() < enemySpawnProbability)
