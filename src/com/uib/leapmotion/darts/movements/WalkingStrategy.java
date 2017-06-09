@@ -1,7 +1,5 @@
 package com.uib.leapmotion.darts.movements;
 
-import com.uib.leapmotion.darts.Gui;
-
 /**
  * Created by stefa on 09.06.2017.
  */

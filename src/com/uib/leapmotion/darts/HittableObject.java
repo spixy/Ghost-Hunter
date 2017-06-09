@@ -4,31 +4,28 @@ import com.uib.leapmotion.darts.movements.MovementStrategy;
 import com.uib.leapmotion.darts.movements.TeleportStrategy;
 import com.uib.leapmotion.darts.movements.WalkingStrategy;
 
-import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 public class HittableObject {
-    public static final int IMAGE_WIDTH = 50;
-    public static final int IMAGE_HEIGHT = 50;
-
+    private int imageWidth;
+    private int imageHeight;
     private Image image;
     private MovementStrategy strategy;
 
     public HittableObject(boolean isWalking) {
-        int widthArea = Gui.WINDOW_WIDTH + IMAGE_WIDTH;
-        int heightArea = Gui.WINDOW_HEIGHT + IMAGE_HEIGHT;
-
         if(isWalking){
-            strategy = new WalkingStrategy(widthArea, heightArea);
+            imageWidth = 50;
+            imageHeight = 50;
+            strategy = new WalkingStrategy(Gui.WINDOW_WIDTH + imageWidth,
+                    Gui.WINDOW_HEIGHT + imageHeight);
+            image = new ImageIcon(getClass().getResource("/enemy.gif")).getImage();
         }else{
-            strategy = new TeleportStrategy(widthArea, heightArea);
-        }
-
-        try {
-            image = ImageIO.read(getClass().getResource("/enemy.gif"));
-        } catch (IOException e) {
-            e.printStackTrace();
+            imageWidth = 80;
+            imageHeight = 80;
+            strategy = new TeleportStrategy(Gui.WINDOW_WIDTH + imageWidth,
+                    Gui.WINDOW_HEIGHT + imageHeight);
+            image = new ImageIcon(getClass().getResource("/enemy2.gif")).getImage();
         }
     }
 
@@ -37,10 +34,10 @@ public class HittableObject {
 
         System.out.println(strategy.getX()+ " " + strategy.getY());
         if (image != null) {
-            g2d.drawImage(image, strategy.getX(), strategy.getY(), IMAGE_WIDTH, IMAGE_HEIGHT, null);
+            g2d.drawImage(image, strategy.getX(), strategy.getY(), imageWidth, imageHeight, null);
         } else {
             g2d.setColor(Color.BLUE);
-            g2d.drawOval(strategy.getX(), strategy.getY(), IMAGE_WIDTH, IMAGE_HEIGHT);
+            g2d.drawOval(strategy.getX(), strategy.getY(), imageWidth, imageHeight);
         }
     }
 
