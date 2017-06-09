@@ -1,4 +1,4 @@
-package com.uib.leapmotion.darts.Movements;
+package com.uib.leapmotion.darts.movements;
 
 /**
  * Created by stefa on 09.06.2017.

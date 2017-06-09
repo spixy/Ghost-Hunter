@@ -1,4 +1,4 @@
-package com.uib.leapmotion.darts.Movements;
+package com.uib.leapmotion.darts.movements;
 
 import com.uib.leapmotion.darts.Gui;
 
@@ -10,9 +10,8 @@ public class WalkingStrategy extends BaseStrategy {
     private int diffX;
     private int diffY;
 
-
-    public WalkingStrategy() {
-        super();
+    public WalkingStrategy(int widthArea, int heightArea) {
+        super(widthArea, heightArea);
 
         diffX = random.nextInt() % SPEED;
         diffY = random.nextInt() % SPEED;
@@ -23,11 +22,11 @@ public class WalkingStrategy extends BaseStrategy {
         int tempX = x + diffX;
         int tempY = y + diffY;
 
-        if (tempX >= Gui.WINDOW_WIDTH || tempX <= 0) {
+        if (tempX >= widthArea || tempX <= 0) {
             diffX = -diffX;
         }
 
-        if (tempY >= Gui.WINDOW_HEIGHT || tempY <= 0) {
+        if (tempY >= heightArea || tempY <= 0) {
             diffY = -diffY;
         }
 

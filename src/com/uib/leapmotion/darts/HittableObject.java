@@ -1,26 +1,28 @@
 package com.uib.leapmotion.darts;
 
-import com.uib.leapmotion.darts.Movements.MovementStrategy;
-import com.uib.leapmotion.darts.Movements.TeleportStrategy;
-import com.uib.leapmotion.darts.Movements.WalkingStrategy;
+import com.uib.leapmotion.darts.movements.MovementStrategy;
+import com.uib.leapmotion.darts.movements.TeleportStrategy;
+import com.uib.leapmotion.darts.movements.WalkingStrategy;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 
 public class HittableObject {
-    private static final int width = 50;
-    private static final int height = 50;
+    public static final int IMAGE_WIDTH = 50;
+    public static final int IMAGE_HEIGHT = 50;
 
     private Image image;
     private MovementStrategy strategy;
 
-
     public HittableObject(boolean isWalking) {
+        int widthArea = Gui.WINDOW_WIDTH + IMAGE_WIDTH;
+        int heightArea = Gui.WINDOW_HEIGHT + IMAGE_HEIGHT;
+
         if(isWalking){
-            strategy = new WalkingStrategy();
+            strategy = new WalkingStrategy(widthArea, heightArea);
         }else{
-            strategy = new TeleportStrategy();
+            strategy = new TeleportStrategy(widthArea, heightArea);
         }
 
         try {
@@ -35,10 +37,10 @@ public class HittableObject {
 
         System.out.println(strategy.getX()+ " " + strategy.getY());
         if (image != null) {
-            g2d.drawImage(image, strategy.getX(), strategy.getY(), width, height, null);
+            g2d.drawImage(image, strategy.getX(), strategy.getY(), IMAGE_WIDTH, IMAGE_HEIGHT, null);
         } else {
             g2d.setColor(Color.BLUE);
-            g2d.drawOval(strategy.getX(), strategy.getY(), width, height);
+            g2d.drawOval(strategy.getX(), strategy.getY(), IMAGE_WIDTH, IMAGE_HEIGHT);
         }
     }
 }

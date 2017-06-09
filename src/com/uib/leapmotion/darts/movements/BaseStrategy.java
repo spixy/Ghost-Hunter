@@ -1,6 +1,7 @@
-package com.uib.leapmotion.darts.Movements;
+package com.uib.leapmotion.darts.movements;
 
 import com.uib.leapmotion.darts.Gui;
+import com.uib.leapmotion.darts.HittableObject;
 
 import java.util.Random;
 
@@ -9,17 +10,21 @@ import java.util.Random;
  */
 public abstract class BaseStrategy implements MovementStrategy {
     protected Random random;
+    protected int widthArea;
+    protected int heightArea;
     protected int x;
     protected int y;
 
-    public BaseStrategy(){
-        random = new Random();
+    public BaseStrategy(int widthArea, int heightArea){
+        this.widthArea = widthArea;
+        this.heightArea = heightArea;
+        this.random = new Random();
         generatePosition();
     }
 
     protected void generatePosition(){
-        x = random.nextInt(Gui.WINDOW_WIDTH);
-        y = random.nextInt(Gui.WINDOW_HEIGHT);
+        x = random.nextInt(widthArea);
+        y = random.nextInt(heightArea);
     }
 
     @Override

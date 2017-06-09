@@ -1,8 +1,4 @@
-package com.uib.leapmotion.darts.Movements;
-
-import com.uib.leapmotion.darts.Gui;
-
-import java.util.Random;
+package com.uib.leapmotion.darts.movements;
 
 /**
  * Created by stefa on 09.06.2017.
@@ -11,8 +7,8 @@ public class TeleportStrategy extends BaseStrategy{
     private static final int TELEPORT_INTERVAL = 150;
     private int count;
 
-    public TeleportStrategy() {
-        super();
+    public TeleportStrategy(int widthArea, int heightArea) {
+        super(widthArea, heightArea);
     }
 
     @Override
