@@ -35,6 +35,13 @@ public class Gui extends JFrame {
     private ArrayList<HittableObject> enemies;
     private BufferedImage background;
 
+    private final String[] bgImageNames = new String[]
+    {
+        "/bg1.jpg",
+        "/bg2.jpg",
+        "/bg3.jpg",
+    };
+
     private Random random = new Random();
 
     public void start(boolean useTimer)
@@ -56,7 +63,8 @@ public class Gui extends JFrame {
         this.setLocationRelativeTo(null);
 
         try {
-            URL url = getClass().getResource("/wallpaper.jpg");
+            int index = random.nextInt(bgImageNames.length);
+            URL url = getClass().getResource(bgImageNames[index]);
             background = ImageIO.read(url);
         } catch (IOException e) {
             background = null;
