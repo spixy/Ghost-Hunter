@@ -34,6 +34,7 @@ public class Gui extends JFrame {
     private float dartX, dartY, dartZ;
     private ArrayList<HittableObject> enemies;
     private BufferedImage background;
+    private int enemyHolder;
 
     private int score = 0;
 
@@ -132,7 +133,8 @@ public class Gui extends JFrame {
         // spawn new enemy
         if (enemies.size() < MaxEnemyCount && random.nextFloat() < enemySpawnProbability)
         {
-            enemies.add(new HittableObject(enemies.size() % 2 == 0));
+            enemies.add(new HittableObject(enemyHolder % 2 == 0));
+            enemyHolder++;
         }
 
         // draw enemies

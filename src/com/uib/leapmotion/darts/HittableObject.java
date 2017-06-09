@@ -23,8 +23,7 @@ public class HittableObject {
         }else{
             imageWidth = 80;
             imageHeight = 80;
-            strategy = new TeleportStrategy(Gui.WINDOW_WIDTH + imageWidth,
-                    Gui.WINDOW_HEIGHT + imageHeight);
+            strategy = new TeleportStrategy(Gui.WINDOW_WIDTH, Gui.WINDOW_HEIGHT);
             image = new ImageIcon(getClass().getResource("/enemy2.gif")).getImage();
         }
     }
