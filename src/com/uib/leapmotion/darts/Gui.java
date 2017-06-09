@@ -35,6 +35,8 @@ public class Gui extends JFrame {
     private ArrayList<HittableObject> enemies;
     private BufferedImage background;
 
+    private int score = 0;
+
     private final String[] bgImageNames = new String[]
     {
         "/bg1.jpg",
@@ -100,7 +102,7 @@ public class Gui extends JFrame {
     {
         this.dartX = clamp(this.dartX + x, 0, getWidth());
         this.dartY = clamp(this.dartY + y, 0, getHeight());
-        this.dartZ = clamp(this.dartZ + z , 1, 10);
+        this.dartZ = clamp(this.dartZ + z , 3, 5);
 
         this.DrawUpdate();
     }
@@ -113,6 +115,19 @@ public class Gui extends JFrame {
             g2d.drawImage(background, 0, 0, null);
         else
             g2d.clearRect(0, 0, getWidth(), getHeight());
+
+        // hit some enemy?
+        if (this.dartZ == 5)
+        {
+            for (int i = enemies.size() - 1; i >= 0; --i)
+            {
+                if (enemies.get(i).Overlap(dartX, dartY, GetDartRadius()))
+                {
+                    enemies.remove(i);
+                    score++;
+                }
+            }
+        }
 
         // spawn new enemy
         if (enemies.size() < MaxEnemyCount && random.nextFloat() < enemySpawnProbability)
@@ -134,8 +149,13 @@ public class Gui extends JFrame {
         contextRender.repaint();
     }
 
+    private float GetDartRadius()
+    {
+        return dartRadius * dartZ;
+    }
+
     private void DrawDart(Graphics2D g2d) {
-        float radius = dartRadius * dartZ;
+        float radius = GetDartRadius();
         //set up the large circle
         Ellipse2D.Double dart = new Ellipse2D.Double(dartX - radius, dartY - radius, 2 * radius, 2 * radius);
         g2d.setColor(dartColor);
@@ -149,7 +169,7 @@ public class Gui extends JFrame {
         g2d.setFont(font);
 
         g2d.setColor(Color.WHITE);
-        g2d.drawString("Score: " + "ScoreCounterPlaceholder", 5, 15);
+        g2d.drawString("Score: " + score, 5, 15);
     }
 
 }

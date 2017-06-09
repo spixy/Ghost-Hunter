@@ -43,4 +43,17 @@ public class HittableObject {
             g2d.drawOval(strategy.getX(), strategy.getY(), IMAGE_WIDTH, IMAGE_HEIGHT);
         }
     }
+
+    public boolean Overlap(float x, float y, float radius)
+    {
+        float x1 = strategy.getX() + IMAGE_WIDTH / 2;
+        float y1 = strategy.getY() + IMAGE_HEIGHT / 2;
+        float x2 = x + radius;
+        float y2 = y + radius;
+
+        double distance = Math.sqrt( ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)) );
+        double maxDistance = (radius + Math.max(IMAGE_WIDTH, IMAGE_HEIGHT)) / 2;
+
+        return distance < maxDistance;
+    }
 }
