@@ -105,10 +105,10 @@ public class Gui extends JFrame {
         }
 
         // draw enemies
-        /*for (HittableObject enemy : enemies)
+        for (HittableObject enemy : enemies)
         {
             enemy.Draw(g2d);
-        }*/
+        }
 
         float radius = dartRadius * dartZ;
 
