@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) {
-        Gui gui = new Gui();
+        final Gui gui = new Gui();
 
         //you should always use the SwingUtilities.invodeLater() method
         //to perform actions on swing elements to make certain everything
