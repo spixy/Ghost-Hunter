@@ -9,7 +9,6 @@ class LoopMotionListener extends Listener {
     boolean readyForControl = false;
     int screenWidth;
     int screenHeight;
-    boolean useAllHands = false;
     Gui gui;
 
     LoopMotionListener(Gui gui) {
@@ -33,29 +32,11 @@ class LoopMotionListener extends Listener {
         if (!readyForControl)
             return;
 
-        if (useAllHands)
-        {
-            for (Hand hand : frame.hands())
-            {
-                ProcessHand(hand);
-            }
-        }
-        else
-        {
-            Hand rightHand = frame.hands().rightmost();
+        Hand rightHand = frame.hands().rightmost();
 
-            if (rightHand != null)
-            {
-                ProcessHand(rightHand);
-            }
-        }
-    }
-
-    void ProcessHand(Hand hand)
-    {
-        if (hand.confidence() > .15)
+        if (rightHand != null && rightHand.confidence() > .15)
         {
-            Vector velocity = hand.palmVelocity();
+            Vector velocity = rightHand.palmVelocity();
             System.out.println("Velocity: " + velocity);
 
             float xSpeed = (velocity.getX() /  12);
