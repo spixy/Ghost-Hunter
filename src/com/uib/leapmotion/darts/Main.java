@@ -10,7 +10,7 @@ import java.io.IOException;
  * Created by spixy on 9.6.2017.
  */
 public class Main {
-    private final static boolean useMouse = false;
+    private final static boolean useMouse = true;
 
     public static void main(String[] args) {
         final Gui gui = new Gui();
