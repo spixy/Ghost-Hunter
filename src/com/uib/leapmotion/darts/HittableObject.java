@@ -8,9 +8,6 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 
-/**
- * Created by spixy on 9.6.2017.
- */
 public class HittableObject {
     private static final int width = 50;
     private static final int height = 50;

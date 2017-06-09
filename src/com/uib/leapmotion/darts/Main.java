@@ -15,9 +15,6 @@ public class Main {
     public static void main(String[] args) {
         final Gui gui = new Gui();
 
-        //you should always use the SwingUtilities.invodeLater() method
-        //to perform actions on swing elements to make certain everything
-        //is happening on the correct swing thread
         Runnable swingStarter = new Runnable()
         {
             @Override
@@ -31,7 +28,7 @@ public class Main {
         if (!useMouse) {
             Controller controller = new Controller();
             controller.setPolicyFlags(PolicyFlag.POLICY_BACKGROUND_FRAMES);
-            Listener listener = new SampleListener(gui);
+            Listener listener = new LoopMotionListener(gui);
             controller.addListener(listener);
             // controller.enableGesture(Gesture.Type.TYPE_SCREEN_TAP);
             // controller.enableGesture(Gesture.Type.TYPE_SWIPE);

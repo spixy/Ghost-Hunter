@@ -1,29 +1,18 @@
 package com.uib.leapmotion.darts;
-/******************************************************************************
- * \
- * Copyright (C) 2012-2013 Leap Motion, Inc. All rights reserved.               *
- * Leap Motion proprietary and confidential. Not for distribution.              *
- * Use subject to the terms of the Leap Motion SDK Agreement available at       *
- * https://developer.leapmotion.com/sdk_agreement, or another agreement         *
- * between Leap Motion and you, your company or other organization.             *
- * \
- ******************************************************************************/
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import java.awt.MouseInfo;
-import java.awt.Point;
 
 import com.leapmotion.leap.*;
 
-class SampleListener extends Listener {
+class LoopMotionListener extends Listener {
     boolean readyForControl = false;
     int screenWidth;
     int screenHeight;
     boolean useAllHands = false;
     Gui gui;
 
-    SampleListener(Gui gui) {
+    LoopMotionListener(Gui gui) {
         this.gui = gui;
     }
 
