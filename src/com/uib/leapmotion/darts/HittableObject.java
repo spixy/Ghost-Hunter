@@ -43,13 +43,13 @@ public class HittableObject {
 
     public boolean Overlap(float x, float y, float radius)
     {
-        float x1 = strategy.getX() + IMAGE_WIDTH / 2;
-        float y1 = strategy.getY() + IMAGE_HEIGHT / 2;
+        float x1 = strategy.getX() + imageWidth / 2;
+        float y1 = strategy.getY() + imageHeight / 2;
         float x2 = x + radius;
         float y2 = y + radius;
 
         double distance = Math.sqrt( ((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)) );
-        double maxDistance = (radius + Math.max(IMAGE_WIDTH, IMAGE_HEIGHT)) / 2;
+        double maxDistance = (radius + Math.max(imageWidth, imageHeight)) / 2;
 
         return distance < maxDistance;
     }
