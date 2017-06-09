@@ -65,12 +65,12 @@ public class Gui extends JFrame {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    Point mouseLoc = MouseInfo.getPointerInfo().getLocation();
-                    dartX = mouseLoc.x;
-                    dartY = mouseLoc.y;
+                        Point mouseLoc = MouseInfo.getPointerInfo().getLocation();
+                        dartX = mouseLoc.x;
+                        dartY = mouseLoc.y;
                     DrawUpdate();
                 }
-            }, 20, 20);
+            }, 15, 15);
         }
     }
 
