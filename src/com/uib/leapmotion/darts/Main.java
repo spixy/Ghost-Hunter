@@ -1,6 +1,7 @@
 package com.uib.leapmotion.darts;
 
 import com.leapmotion.leap.Controller;
+import com.leapmotion.leap.Listener;
 
 import java.io.IOException;
 
@@ -10,7 +11,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
         // Create a sample listener and controller
-        HandOutput listener = new HandOutput();
+        Listener listener = new SampleListener(); // or you can use HandOutput class as Listener
         Controller controller = new Controller();
 
         // Have the sample listener receive events from the controller
