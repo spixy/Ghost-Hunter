@@ -17,8 +17,8 @@ import javax.swing.JPanel;
  */
 public class Gui extends JFrame {
     private static final long serialVersionUID = 1L;
-    private int width = 500;
-    private int height = 500;
+    private int width = 800;
+    private int height = 600;
     private int padding = 50;
     private BufferedImage graphicsContext;
     private JPanel contentPanel = new JPanel();
@@ -26,6 +26,8 @@ public class Gui extends JFrame {
     private RenderingHints antialiasing;
     private final float dartRadius = 10;
     private final Color dartColor = Color.white;
+
+    private float dartX, dartY, dartZ;
 
     public void start()
     {
@@ -42,23 +44,43 @@ public class Gui extends JFrame {
         //take advantage of auto-sizing the window based on the size of its contents
         this.pack();
         this.setLocationRelativeTo(null);
-        this.DrawDart(width / 2, height / 2, 0);
+
+        this.dartX = getWidth() / 2;
+        this.dartY = getHeight() / 2;
+        this.dartZ = 0;
+        this.DrawDart();
+
         setVisible(true);
     }
 
-    public void DrawDart(float x, float y, float z) {
+    private static float clamp(float val, float min, float max) {
+        return Math.max(min, Math.min(max, val));
+    }
+
+    public void OnHandChange(float x, float y, float z)
+    {
+        this.dartX = clamp(this.dartX + x, 0, getWidth());
+        this.dartY = clamp(this.dartY + y, 0, getHeight());
+        this.dartZ = clamp(this.dartZ + z , 1, 10);
+
+        this.DrawDart();
+    }
+
+    private void DrawDart() {
         Graphics2D g2d = graphicsContext.createGraphics();
         g2d.setRenderingHints(antialiasing);
+
+        g2d.clearRect(0, 0, getWidth(), getHeight());
 
         //Set up the font to print on the circles
         Font font = g2d.getFont();
         font = font.deriveFont(Font.BOLD, 14f);
         g2d.setFont(font);
 
-        float radius = dartRadius * z; // TODO: more Z == smaller dart
+        float radius = dartRadius * dartZ; // TODO: more dartZ == smaller dart
 
         //set up the large circle
-        Ellipse2D.Double dart = new Ellipse2D.Double(x - radius, y - radius, 2 * radius, 2 * radius);
+        Ellipse2D.Double dart = new Ellipse2D.Double(dartX - radius, dartY - radius, 2 * radius, 2 * radius);
 
         //we save the big circle for last, to cover up any stray marks under the stroke
         //of its perimeter. We also set the clip back to null to prevent the large circle
