@@ -1,2 +1,2 @@
-# Throwing-shit-on-your-face
+# Throwing shit on your face
 UIB project
