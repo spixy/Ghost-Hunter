@@ -20,8 +20,7 @@ class SampleListener extends Listener {
     boolean readyForControl = false;
     int screenWidth;
     int screenHeight;
-    boolean iBoxGet = false;
-    InteractionBox iBox = null;
+    boolean useAllHands = false;
     Gui gui;
 
     SampleListener(Gui gui) {
@@ -42,42 +41,34 @@ class SampleListener extends Listener {
     public void onFrame(Controller controller) {
         Frame frame = controller.frame(); // The latest frame
 
-        if (!iBoxGet) { //TODO: I dont know what is this IF
-            iBox = frame.interactionBox();
-            iBoxGet = true;
-            System.out.println("Interaction box set!");
-        }
-
-        Hand rightHand = frame.hands().rightmost();
-
-        if (rightHand == null)
+        if (!readyForControl)
             return;
 
-        Vector velocity = rightHand.palmVelocity();
-
-        Finger thumbFinger = null, indexFinger = null;
-
-        for (Finger f : rightHand.fingers())
+        if (useAllHands)
         {
-             switch (f.type())
+            for (Hand hand : frame.hands())
             {
-                case TYPE_THUMB:
-                    thumbFinger = f;
-                    break;
-
-                case TYPE_INDEX:
-                    indexFinger = f;
-                    break;
+                ProcessHand(hand);
             }
         }
-
-        if (thumbFinger == null || indexFinger == null)
-            return;
-
-        System.out.print("Thumb finger: " + thumbFinger.tipPosition() + ", Index finger: " + indexFinger.tipPosition() + ", velocity: " + velocity + "\n");
-
-        if (readyForControl && rightHand.confidence() > .15)
+        else
         {
+            Hand rightHand = frame.hands().rightmost();
+
+            if (rightHand != null)
+            {
+                ProcessHand(rightHand);
+            }
+        }
+    }
+
+    void ProcessHand(Hand hand)
+    {
+        if (hand.confidence() > .15)
+        {
+            Vector velocity = hand.palmVelocity();
+            System.out.println("Velocity: " + velocity);
+
             float xSpeed = (velocity.getX() /  12);
             float ySpeed = (velocity.getY() / -12);
             float zSpeed = (velocity.getZ() / 400);

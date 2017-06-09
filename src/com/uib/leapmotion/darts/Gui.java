@@ -17,7 +17,6 @@ import javax.swing.JPanel;
  * Created by spixy on 9.6.2017.
  */
 public class Gui extends JFrame {
-    private static final long serialVersionUID = 1L;
     public static final int WINDOW_WIDTH = 800;
     public static final int WINDOW_HEIGHT = 600;
     private int padding = 50;
@@ -127,7 +126,7 @@ public class Gui extends JFrame {
         g2d.setFont(font);
 
         g2d.setColor(Color.WHITE);
-        g2d.drawString("Score: " + "ScoreCounterPlaceholder", 5, 5);
+        g2d.drawString("Score: " + "ScoreCounterPlaceholder", 5, 15);
     }
 
 }

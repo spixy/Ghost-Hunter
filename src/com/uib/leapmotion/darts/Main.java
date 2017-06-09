@@ -10,7 +10,7 @@ import java.io.IOException;
  * Created by spixy on 9.6.2017.
  */
 public class Main {
-    private final static boolean useTimer = true;
+    private final static boolean useMouse = false;
 
     public static void main(String[] args) {
         final Gui gui = new Gui();
@@ -22,13 +22,13 @@ public class Main {
         {
             @Override
             public void run(){
-                gui.start(useTimer);
+                gui.start(useMouse);
             }
         };
 
         SwingUtilities.invokeLater(swingStarter);
 
-        if (!useTimer) {
+        if (!useMouse) {
             Controller controller = new Controller();
             controller.setPolicyFlags(PolicyFlag.POLICY_BACKGROUND_FRAMES);
             Listener listener = new SampleListener(gui);
