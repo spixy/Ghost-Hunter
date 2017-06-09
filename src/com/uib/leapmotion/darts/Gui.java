@@ -19,8 +19,8 @@ import javax.swing.JPanel;
  */
 public class Gui extends JFrame {
     private static final long serialVersionUID = 1L;
-    private int width = 800;
-    private int height = 600;
+    public static final int WINDOW_WIDTH = 800;
+    public static final int WINDOW_HEIGHT = 600;
     private int padding = 50;
     private BufferedImage graphicsContext;
     private JPanel contentPanel = new JPanel();
@@ -41,11 +41,11 @@ public class Gui extends JFrame {
         enemies = new ArrayList<>();
 
         antialiasing = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        graphicsContext = new BufferedImage(width + (2 * padding), width + (2 * padding), BufferedImage.TYPE_INT_RGB);
+        graphicsContext = new BufferedImage(WINDOW_WIDTH + (2 * padding), WINDOW_WIDTH + (2 * padding), BufferedImage.TYPE_INT_RGB);
         contextRender = new JLabel(new ImageIcon(graphicsContext));
 
         contentPanel.add(contextRender);
-        contentPanel.setSize(width + padding * 2, height + padding * 2);
+        contentPanel.setSize(WINDOW_WIDTH + padding * 2, WINDOW_HEIGHT + padding * 2);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
