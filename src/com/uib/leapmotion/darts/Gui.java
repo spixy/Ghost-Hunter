@@ -8,6 +8,8 @@ import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -31,8 +33,8 @@ public class Gui extends JFrame {
     private final float enemySpawnProbability = 0.1f;
     private final int MaxEnemyCount = 3;
     private float dartX, dartY, dartZ;
-
     private ArrayList<HittableObject> enemies;
+    private final boolean useTimer = true;
 
     private Random random = new Random();
 
@@ -60,6 +62,17 @@ public class Gui extends JFrame {
         this.DrawUpdate();
 
         setVisible(true);
+
+        if (useTimer)
+        {
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    DrawUpdate();
+                }
+            }, 20, 20);
+        }
     }
 
     private static float clamp(float val, float min, float max) {
