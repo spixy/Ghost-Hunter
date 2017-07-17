@@ -1,2 +1,2 @@
-# Throwing shit on your face
+# Dart game using Leap Motion
 UIB project
